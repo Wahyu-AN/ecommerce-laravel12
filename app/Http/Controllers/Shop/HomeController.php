@@ -3,28 +3,28 @@
 namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-    /**
-     * Tampilkan halaman beranda storefront.
-     */
     public function index(): View
     {
-        // TODO Fase 3 & 4: ganti data demo ini dengan kategori & produk asli dari database.
-        $demoCategories = ['Elektronik', 'Pakaian', 'Aksesoris', 'Rumah Tangga'];
+        $categories = Category::where('is_active', true)
+            ->orderBy('name')
+            ->get();
 
-        $demoProducts = [
-            ['name' => 'Kaos Polos Premium', 'category' => 'Pakaian', 'price' => 85000],
-            ['name' => 'Headset Bluetooth', 'category' => 'Elektronik', 'price' => 249000],
-            ['name' => 'Tas Ransel Daily', 'category' => 'Aksesoris', 'price' => 175000],
-            ['name' => 'Botol Minum 1L', 'category' => 'Rumah Tangga', 'price' => 65000],
-        ];
+        $featuredProducts = Product::where('is_active', true)
+            ->where('is_featured', true)
+            ->with('images')
+            ->latest('id')
+            ->take(8)
+            ->get();
 
         return view('shop.home', [
-            'demoCategories' => $demoCategories,
-            'demoProducts' => $demoProducts,
+            'categories' => $categories,
+            'featuredProducts' => $featuredProducts,
         ]);
     }
 }

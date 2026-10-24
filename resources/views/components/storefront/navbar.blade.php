@@ -9,8 +9,7 @@
             {{-- Menu desktop --}}
             <div class="hidden items-center gap-6 md:flex">
                 <a href="{{ route('home') }}" class="font-medium text-gray-700 hover:text-blue-600">Beranda</a>
-                {{-- TODO Fase 4: ganti '#' dengan route('shop.products.index') --}}
-                <a href="#" class="font-medium text-gray-700 hover:text-blue-600">Produk</a>
+                <a href="{{ route('shop.products.index') }}" class="font-medium text-gray-700 hover:text-blue-600">Produk</a>
 
                 @auth
                     <a href="{{ route('dashboard') }}" class="font-medium text-gray-700 hover:text-blue-600">Dashboard</a>
@@ -43,7 +42,7 @@
     <div x-show="open" x-transition.origin.top class="border-t border-gray-100 bg-white md:hidden">
         <div class="space-y-1 px-4 py-3">
             <a href="{{ route('home') }}" class="block rounded-md px-3 py-2 font-medium text-gray-700 hover:bg-gray-100">Beranda</a>
-            <a href="#" class="block rounded-md px-3 py-2 font-medium text-gray-700 hover:bg-gray-100">Produk</a>
+            <a href="{{ route('shop.products.index') }}" class="block rounded-md px-3 py-2 font-medium text-gray-700 hover:bg-gray-100">Produk</a>
 
             @auth
                 <a href="{{ route('dashboard') }}" class="block rounded-md px-3 py-2 font-medium text-gray-700 hover:bg-gray-100">Dashboard</a>

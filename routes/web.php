@@ -1,5 +1,7 @@
 <?php
+
 use App\Http\Controllers\Shop\HomeController;
+use App\Http\Controllers\Shop\ProductController as ShopProductController; // <-- Ditambahkan (di-alias agar tidak bentrok dengan Admin\ProductController)
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +14,16 @@ use App\Http\Controllers\Admin\ProductController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+/*
+|--------------------------------------------------------------------------
+| Route Shop / Storefront
+|--------------------------------------------------------------------------
+*/
+Route::name('shop.')->group(function () {
+    Route::get('/produk', [ShopProductController::class, 'index'])->name('products.index');
+    Route::get('/produk/{product}', [ShopProductController::class, 'show'])->name('products.show');
+});
 
 /*
 |--------------------------------------------------------------------------
