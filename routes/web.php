@@ -3,6 +3,7 @@ use App\Http\Controllers\Shop\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,8 @@ Route::middleware(['auth', 'admin'])
     ->name('admin.')
     ->group(function () {
         Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
+
+        Route::resource('categories', CategoryController::class)->except(['show']);
     });
 
 require __DIR__.'/auth.php';
